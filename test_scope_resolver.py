@@ -91,6 +91,20 @@ def main() -> int:
         failures,
     )
 
+    global_fallback = Environment()
+    global_fallback.define("g", 30)
+    callee = Environment(parent=global_fallback)
+    check(
+        "dynamic mode falls back to the global environment",
+        resolve_name("g", callee, [caller_old, caller_new], mode="dynamic") == 30,
+        failures,
+    )
+    try:
+        resolve_name("nope", callee, [caller_old, caller_new], mode="dynamic")
+        check("dynamic mode raises SemanticError for an unresolvable name", False, failures)
+    except SemanticError:
+        check("dynamic mode raises SemanticError for an unresolvable name", True, failures)
+
     print("\nReplaying the Part A, Question 2 classic divergence case...\n")
     # global x = 10 (line 1)
     # proc A(): local x = 1 (line 2); call B()

@@ -15,12 +15,16 @@ imports from `lexer.py`, so the whole chain has to be importable).
 python test_scope_resolver.py
 ```
 Complete `resolve_name` in `scope_resolver.py`. The harness tests
-static and dynamic mode separately, then replays the Part A "classic
-divergence" example and confirms the two modes resolve `x` to
-genuinely different declaration lines. Success Token prints once
-every check passes.
+static and dynamic mode separately, checks most-recent-caller order,
+checks global fallback and missing-name errors, then replays the Part A
+"classic divergence" example. The Success Token prints only after every
+check passes.
 
 ## Submit
 1. `PA5_Theory.pdf` (or `.md`)
-2. `scope_resolver.py` (and your working `lexer.py`/`parser.py`/`symtable.py`)
+2. `scope_resolver.py`
 3. The Success Token
+
+Keep your working `lexer.py`, `parser.py`, and `symtable.py` in the repository
+so the import chain works. You do not need to upload those inherited files to
+Blackboard for PA 5.
